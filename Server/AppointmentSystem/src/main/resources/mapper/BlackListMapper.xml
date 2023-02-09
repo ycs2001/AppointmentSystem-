@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.AppointmentSystem.Dao.BlackListDao">
+    <select id="queryLimit" resultType="BlackListEntity">
+        select * from blackList limit #{currentPage},#{pageSize};
+    </select>
+
+    <select id="getByLike" resultType="BlackListEntity">
+        select * from blackList where id_card_number like #{id_card_number}
+    </select>
+
+    <select id="getTotalNumber" resultType="Int">
+        select count(*) from blackList;
+    </select>
+
+    <insert id="addBlackList" parameterType="BlackListEntity">
+        insert into blackList(black_name, id_card_number, phone_number, default_times, time_of_default) values(#{black_name},#{id_card_number},#{phone_number},#{default_times},#{time_of_default});
+    </insert>
+
+    <update id="updateBlackList" parameterType="BlackListEntity">
+        update blackList set black_name=#{black_name},id_card_number=#{id_card_number},phone_number=#{phone_number},default_times=#{default_times},time_of_default=#{time_of_default} where id_card_number=#{id_card_number};
+    </update>
+
+    <delete id="deleteBlackList" parameterType="BlackListEntity">
+        delete from blackList where ID_card_number=#{ID_card_number};
+    </delete>
+
+</mapper>

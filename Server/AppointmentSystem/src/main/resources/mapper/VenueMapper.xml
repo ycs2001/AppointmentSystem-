@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.AppointmentSystem.Dao.VenueDao">
+    <select id="queryLimit" resultType="VenueEntity">
+        select * from venue_management limit #{currentPage},#{pageSize};
+    </select>
+
+    <select id="queryVenue" resultType="VenueEntity">
+        select venue_name,venue_introduction,venue_picture from venue_management limit #{currentPage},#{pageSize};
+    </select>
+
+    <select id="getByLike" resultType="VenueEntity">
+        select * from venue_management where venue_name like #{venue_name}
+    </select>
+
+    <select id="getTotalNumber" resultType="Int">
+        select count(*) from venue_management;
+    </select>
+
+    <insert id="addVenue" parameterType="VenueEntity">
+        insert into venue_management(venue_name,venue_introduction,venue_number,venue_picture) values(#{venue_name},#{venue_introduction},#{venue_number},#{venue_picture});
+    </insert>
+
+
+    <update id="upload" parameterType="VenueEntity">
+        update venue_management set venue_picture=#{venue_picture} where venue_name=#{venue_name};
+    </update>
+
+    <update id="updateVenue" parameterType="VenueEntity">
+        update venue_management set venue_name=#{venue_name},venue_introduction=#{venue_introduction},venue_number=#{venue_number} where venue_name=#{venue_name};
+    </update>
+
+    <delete id="deleteVenue" parameterType="VenueEntity">
+        delete from venue_management where venue_name=#{venue_name};
+    </delete>
+
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.AppointmentSystem.Dao.VisitDao">
+
+
+
+
+
+
+    <select id="getTotalNumber" resultType="Int">
+        select count(*) from visit_management;
+    </select>
+
+    <select id="queryLimit" resultType="VisitEntity">
+        select * from visit_management limit #{currentPage},#{pageSize};
+    </select>
+
+    <select id="queryDate" resultType="VisitEntity">
+        select open_start_time,open_end_time from visit_management where open_date=#{open_date};
+    </select>
+
+    <select id="queryNumber" resultType="VisitEntity">
+        select open_people_number from visit_management where open_date=#{open_date};
+    </select>
+
+
+    <select id="getByLike" resultType="VisitEntity">
+        select * from visit_management where open_date=#{open_date};
+    </select>
+
+    <insert id="addVisit" parameterType="VisitEntity">
+        insert into visit_management(open_location,open_start_time,open_end_time,open_people_number,open_staff_in_charge,open_date) values(#{open_location},#{open_start_time},#{open_end_time},#{open_people_number},#{open_staff_in_charge},#{open_date});
+    </insert>
+
+    <update id="updateVisit" parameterType="VisitEntity">
+        update visit_management set open_location=#{open_location},open_start_time=#{open_start_time},open_end_time=#{open_end_time},open_people_number=#{open_people_number},open_staff_in_charge=#{open_staff_in_charge} where open_date=#{open_date};
+    </update>
+
+    <update id="updateVisit_time" parameterType="VisitEntity">
+        update visit_management set open_start_time=#{open_start_time},open_end_time=#{open_end_time} where open_date=#{open_date};
+    </update>
+
+    <update id="updateVisit_location" parameterType="VisitEntity">
+        update visit_management set open_location=#{open_location} where open_date=#{open_date};
+    </update>
+
+    <update id="updateVisit_people_number" parameterType="VisitEntity">
+        update visit_management set open_people_number=#{open_people_number} where open_date=#{open_date};
+    </update>
+
+    <update id="updateVisit_staff_in_charge" parameterType="VisitEntity">
+        update visit_management set open_staff_in_charge=#{open_staff_in_charge} where open_date=#{open_date};
+    </update>
+
+    <delete id="deleteVisit" parameterType="VisitEntity">
+        delete from visit_management where open_date=#{open_date};
+    </delete>
+
+
+</mapper>

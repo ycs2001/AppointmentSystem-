@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.AppointmentSystem.Dao.ActivityDao">
+    <select id="queryLimit" resultType="ActivityEntity">
+        select * from activity_management limit #{currentPage},#{pageSize};
+    </select>
+
+    <select id="getByLike" resultType="ActivityEntity">
+        select * from activity_management where activity_name like #{activity_name}
+    </select>
+
+    <select id="getTotalNumber" resultType="Int">
+        select count(*) from activity_management;
+    </select>
+
+    <insert id="addActivity" parameterType="ActivityEntity">
+        insert into activity_management(activity_name,activity_start_time,activity_end_time,activity_location,activity_number,activity_introduction,activity_details) values(#{activity_name},#{activity_start_time},#{activity_end_time},#{activity_location},#{activity_number},#{activity_introduction},#{activity_details});
+    </insert>
+
+    <update id="updateActivity" parameterType="ActivityEntity">
+        update activity_management set activity_name=#{activity_name},activity_start_time=#{activity_start_time},activity_end_time=#{activity_end_time},activity_location=#{activity_location},activity_number=#{activity_number},activity_introduction=#{activity_introduction},activity_details=#{activity_details} where activity_name=#{activity_name};
+    </update>
+
+    <delete id="deleteActivity" parameterType="ActivityEntity">
+        delete from activity_management where activity_name=#{activity_name};
+    </delete>
+
+</mapper>

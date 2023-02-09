@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.AppointmentSystem.Dao.MuseumManagementDao">
+    <select id="queryLimit" resultType="MuseumManagementEntity">
+        select * from museum_management limit #{currentPage},#{pageSize};
+    </select>
+
+    <select id="queryActivity" resultType="MuseumManagementEntity">
+        select activityList_title,activityList_content from museum_management limit #{currentPage},#{pageSize};
+    </select>
+
+    <select id="queryEvent" resultType="MuseumManagementEntity">
+        select eventList_title,eventList_content from museum_management limit #{currentPage},#{pageSize};
+    </select>
+
+    <select id="getByLike" resultType="MuseumManagementEntity">
+        select * from museum_management where museum_id = #{museum_id}
+    </select>
+
+    <select id="getTotalNumber" resultType="Int">
+        select count(*) from museum_management;
+    </select>
+
+    <insert id="addMuseumManagementList" parameterType="MuseumManagementEntity">
+        insert into museum_management(museum_introduction, eventList_title, eventList_content, activityList_title, activityList_content,museum_id) values(#{museum_introduction},#{EventList_title},#{EventList_content},#{activityList_title},#{activityList_content},#{museum_id});
+    </insert>
+
+    <update id="updateMuseumManagementList" parameterType="MuseumManagementEntity">
+        update museum_management set museum_introduction=#{museum_introduction},eventList_title=#{EventList_title},eventList_content=#{EventList_content},activityList_title=#{activityList_title},activityList_content=#{activityList_content},museum_id=#{museum_id} where museum_id=#{museum_id};
+    </update>
+
+    <delete id="deleteMuseumManagementList" parameterType="MuseumManagementEntity">
+        delete from museum_management where museum_id=#{museum_id};
+    </delete>
+
+</mapper>

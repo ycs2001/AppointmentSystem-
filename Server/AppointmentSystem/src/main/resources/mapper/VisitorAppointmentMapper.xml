@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.AppointmentSystem.Dao.VisitorAppointmentDao">
+
+
+
+    <select id="getByLike" resultType="VisitorAppointmentEntity">
+        select * from system_visitor where id_card_number like #{id_card_number}
+    </select>
+
+    <select id="getTotalNumber" resultType="Int">
+        select count(*) from system_visitor;
+    </select>
+
+    <select id="queryLimit" resultType="VisitorAppointmentEntity">
+        select * from system_visitor limit #{currentPage},#{pageSize};
+    </select>
+
+    <insert id="addVisitorAppointment" parameterType="VisitorAppointmentEntity">
+        insert into system_visitor(visitor_name,id_card_number,phone_number,visitor_start_time,visitor_end_time,venue_booked,activity_booked,visit_date) values(#{visitor_name},#{id_card_number},#{phone_number},#{visitor_start_time},#{visitor_end_time},#{venue_booked},#{activity_booked},#{visit_date});
+    </insert>
+
+    <update id="updateVisitorAppointment" parameterType="VisitorAppointmentEntity">
+        update system_visitor set id_card_number=#{id_card_number},phone_number=#{phone_number},visitor_start_time=#{visitor_start_time},visitor_end_time=#{visitor_end_time},venue_booked=#{venue_booked},activity_booked=#{activity_booked},visit_date=#{visit_date} where visitor_name=#{visitor_name};
+    </update>
+
+    <delete id="deleteVisitorAppointment" parameterType="VisitorAppointmentEntity">
+        delete from system_visitor where id_card_number=#{id_card_number} And visit_date=#{visit_date};
+    </delete>
+
+
+</mapper>

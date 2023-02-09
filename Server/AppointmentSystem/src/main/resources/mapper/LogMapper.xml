@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.AppointmentSystem.Dao.LogDao">
+    <select id="queryLimit" resultType="LogEntity">
+        select * from log limit #{currentPage},#{pageSize};
+    </select>
+
+    <select id="getByDate" resultType="LogEntity">
+        select * from log where operation_time like #{operation_time}
+    </select>
+
+    <select id="getByCreator" resultType="LogEntity">
+        select * from log where creator like #{creator}
+    </select>
+
+    <select id="getByOperation" resultType="LogEntity">
+        select * from log where operation like #{operation}
+    </select>
+
+    <select id="getTotalNumber" resultType="Int">
+        select count(*) from log;
+    </select>
+
+    <insert id="addLog" parameterType="LogEntity">
+        insert into log(operation_time, creator, operation) values(#{operation_time},#{creator},#{operation});
+    </insert>
+
+
+</mapper>

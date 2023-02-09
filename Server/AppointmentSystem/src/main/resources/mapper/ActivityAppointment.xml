@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.AppointmentSystem.Dao.ActivityAppointmentDao">
+
+
+
+    <select id="getByLike" resultType="ActivityAppointmentEntity">
+        select * from activityappointment where activityappointment.visitor_name like #{visitor_name}
+    </select>
+
+
+
+    <select id="getTotalNumber" resultType="Int">
+        select count(*) from activityappointment;
+    </select>
+
+    <select id="queryLimit" resultType="ActivityAppointmentEntity">
+        select * from activityappointment limit #{currentPage},#{pageSize};
+    </select>
+
+    <insert id="addActivityAppointment" parameterType="ActivityAppointmentEntity">
+        insert into activityappointment(visitor_name,id_card_number,phone_number,activity_booked) values(#{visitor_name},#{id_card_number},#{phone_number},#{activity_booked});
+    </insert>
+
+    <update id="updateActivityAppointment" parameterType="ActivityAppointmentEntity">
+        update activityappointment set visitor_name=#{visitor_name},id_card_number=#{id_card_number},phone_number=#{phone_number},activity_booked=#{activity_booked} where visitor_name=#{visitor_name};
+    </update>
+
+    <delete id="deleteActivityAppointment" parameterType="ActivityAppointmentEntity">
+        delete from activityappointment where visitor_name=#{visitor_name};
+    </delete>
+
+
+</mapper>

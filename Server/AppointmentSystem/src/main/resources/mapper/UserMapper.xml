@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.AppointmentSystem.Dao.UserDao">
+    <select id="queryLimit" resultType="UserEntity">
+        select * from system_administrator limit #{currentPage},#{pageSize};
+    </select>
+
+    <insert id="addUser" parameterType="UserEntity">
+        insert into system_administrator(admin_id,admin_password,admin_user_name,admin_phone_number,admin_email) values(#{admin_id},#{admin_password},#{admin_user_name},#{admin_phone_number},#{admin_email});
+    </insert>
+
+    <update id="updateUser" parameterType="UserEntity">
+        update user set admin_password=#{admin_password} where admin_id=#{admin_id};
+    </update>
+
+    <delete id="deleteUser" parameterType="UserEntity">
+        delete from user where admin_id=#{admin_id};
+    </delete>
+    <select id="login" parameterType="UserEntity" resultType="String">
+        select admin_id from system_administrator where admin_user_name=#{admin_user_name} and admin_password=#{admin_password};
+    </select>
+
+
+
+
+</mapper>
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.AppointmentSystem.Dao.MessageDao">
+    <select id="queryLimit" resultType="MessageEntity">
+        select * from message_management limit #{currentPage},#{pageSize};
+    </select>
+
+
+    <select id="getTotalNumber" resultType="Int">
+        select count(*) from message_management;
+    </select>
+
+    <insert id="addMessage" parameterType="MessageEntity">
+        insert into message_management(activity_name, appointed_S_message, appointed_F_message, changes_activity) values(#{activity_name},#{appointed_S_message},#{appointed_F_message},#{changes_activity});
+    </insert>
+
+    <update id="updateMessage" parameterType="MessageEntity">
+        update message_management set activity_name=#{activity_name},appointed_S_message=#{appointed_S_message},appointed_F_message=#{appointed_F_message},changes_activity=#{changes_activity} where activity_name=#{activity_name};
+    </update>
+
+    <delete id="deleteMessage" parameterType="MessageEntity">
+        delete from message_management where activity_name=#{activity_name};
+    </delete>
+
+</mapper>
