@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>LoginModule</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>LoginModule</name>
-    <description>Demo project for Spring Boot</description>
+    <name>Museum Appointment System</name>
+    <description>Backend for museum visits, activity reservations, and administration</description>
 
     <properties>
         <java.version>1.8</java.version>
